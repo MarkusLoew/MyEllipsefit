@@ -25,8 +25,9 @@ Fit parameters are:
 * The tilt angle of the ellipse. 
 * The area of the ellipse. 
 
-If coords = TRUE, returns a data frame with the coordinates of the ellipse in addition.
-If bbox = TRUE, in addition, returns a data frame with the extreme values of the coordinates of the bounding box for the ellipse.
+If *coords = TRUE*, returns a data frame with the coordinates of the ellipse in addition.
+
+If *bbox = TRUE*, in addition, returns a data frame with the extreme values of the coordinates of the bounding box for the ellipse.
 
 Items are returned as a named list. See example below.
 
