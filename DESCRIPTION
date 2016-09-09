@@ -1,6 +1,6 @@
 Package: MyEllipsefit
 Title: Uses the conicfit package to fit an ellipse, convenience function
-Version: 0.0.1.7
+Version: 0.0.1.8
 Authors@R: person("Markus", "Loew", email = "m.loew@unimelb.edu.au", role = c("aut", "cre"))
 Description: Uses \code{conicfit} to calculate an ellipse to fit data. Convenience package to provide ellipsis parameters (axes, angle, area, and more).
 Depends:

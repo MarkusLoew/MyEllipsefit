@@ -43,8 +43,8 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    # assemble a matrix from x, y
    xy <- as.matrix(stats::na.omit(data.frame(x, y)))
    
-   if (nrow(xy) > 0) {
-   
+   if (nrow(xy) > 0 & length(unique(xy[, 1])) > 3 & length(unique(xy[, 2])) > 3) {
+ 
    # from conicfit help:
    # applies the algebraic ellipse fit method by Fitzgibbon-Pilu-Fisher
    # returns vector for fitting ellipse: ax^2 + bxy + cy^2 +dx + ey + f = 0
@@ -72,7 +72,6 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
 	names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
 	                        "Axis_A", "Axis_B", "Angle")
 	geopara.out$Area <- pi * geopara.out$Axis_A * geopara.out$Axis_B
-	#print(geopara.out)
 	
 	if (coords == FALSE) {
 	   return(geopara.out)
@@ -117,9 +116,24 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    } else {
    warning("nrow(xy) is not > 0")
    geopara.out <- as.data.frame(t(rep(NA, 6)))
-   names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
-                            "Axis_A", "Axis_B", "Angle", "Area")
+   names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", "Axis_A", "Axis_B", "Angle", "Area")
+   
+   if (coords == TRUE) {
+       xycoord <- data.frame(x = NA, y = NA)
+       geopara.list <- list(geopara.out, xycoord)
+       names(geopara.list) <- c("Para", "Coord")
+       
+	   if (bbox == TRUE) {
+	       bbox.df <- data.frame(x = c(NA, NA),
+		                     y = c(NA, NA))
+	       rownames(bbox.df) <- c("Minima", "Maxima")
+	       geopara.list <- list(geopara.out, xycoord, bbox.df)
+       	       names(geopara.list) <- c("Para", "Coord", "Bbox")
+           }
+        return(geopara.list)
+   } else {
    return(geopara.out)
    }
+ }
 }
 
