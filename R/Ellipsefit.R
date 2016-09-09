@@ -39,6 +39,7 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    ellipara <- try(conicfit::EllipseDirectFit(xy))
    
    if (inherits(ellipara, "try-error")) {
+        message("Ellipsefit: no fit found, returning NA")
 	geopara.out <- as.data.frame(t(rep(NA, 6)))
 	names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
 			        "Axis_A", "Axis_B", "Angle", "Area")
