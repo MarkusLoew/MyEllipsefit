@@ -5,7 +5,16 @@
 #' @param y names of y-vector in data 
 #' @param coords Logical. If TRUE, function returns a list of ellipse fit parameters and coordinates of the resulting ellipse. If FALSE, returns the ellipse fit parameters only. Default is FALSE.
 #' @param bbox Logical. If TRUE, function returns the extremes of the ellipse coordinates. These coordinares can be used to draw a bounding box around the ellipse. Only available when coords = TRUE. Default is FALSE.
-#' @return Either a data frame with the fit parameters for the ellipse (Default). Or a list with two data frames, the fit parameters and the coordinates to draw the ellipse. Fit parameters are:  The X coordinate of the center of the ellipse. The Y coordinate of the center of the ellipse. The distance from the center to the perimenter along the major axis. The distance from the center to the perimenter along the minor axis. The tilt angle of the ellipse. The area of the ellipse. If bbox is set to TRUE, in addition returns a data frame with the extreme values of the coordinates of the bounding box for the ellipse.
+#' @return Either a data frame with the fit parameters for the ellipse (Default). Or a list with two data frames, the fit parameters and the coordinates to draw the ellipse. 
+#' Fit parameters are:  
+#' * The X coordinate of the center of the ellipse. 
+#' * The Y coordinate of the center of the ellipse. 
+#' * The distance from the center to the perimenter along the major axis. 
+#' * The distance from the center to the perimenter along the minor axis. 
+#' * The tilt angle of the ellipse. 
+#' * The area of the ellipse. 
+#' If \code{bbox = TRUE}, in addition returns a data frame with the extreme values of the coordinates as the bounding box of the ellipse.
+#' @seealso  \code{conicfit}
 #' @examples 
 #' \dontrun{
 #' Ellipsefit(eg.hour, temp.hour, Pp.hour, coords = TRUE)
