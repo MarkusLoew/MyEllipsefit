@@ -1,19 +1,21 @@
-#' Calculate an Ellipsefit using conicfit package
+#' Fits an ellipse to data using \code{conicfit} package
 #' 
 #' @param data Name of data frame
 #' @param x name of x-vector in data
 #' @param y names of y-vector in data 
 #' @param coords Logical. If TRUE, function returns a list of ellipse fit parameters and coordinates of the resulting ellipse. If FALSE, returns the ellipse fit parameters only. Default is FALSE.
 #' @param bbox Logical. If TRUE, function returns the extremes of the ellipse coordinates. These coordinares can be used to draw a bounding box around the ellipse. Only available when coords = TRUE. Default is FALSE.
-#' @return Either a data frame with the fit parameters for the ellipse (Default). Or a list with two data frames, the fit parameters and the coordinates to draw the ellipse. 
-#' Fit parameters are:  
-#' * The X coordinate of the center of the ellipse. 
-#' * The Y coordinate of the center of the ellipse. 
-#' * The distance from the center to the perimenter along the major axis. 
-#' * The distance from the center to the perimenter along the minor axis. 
-#' * The tilt angle of the ellipse. 
-#' * The area of the ellipse. 
-#' If \code{bbox = TRUE}, in addition returns a data frame with the extreme values of the coordinates as the bounding box of the ellipse.
+#' @return Either a data frame with the fit parameters for the ellipse (Default). If \code{coords = TRUE} a list with two data frames, the fit parameters and the coordinates to draw the ellipse. 
+#' Fit parameters are: 
+#' \itemize{
+#'  \item{The X coordinate of the center of the ellipse.}
+#'  \item{The Y coordinate of the center of the ellipse.}
+#'  \item{The distance from the center to the perimenter along the major axis.}
+#'  \item{The distance from the center to the perimenter along the minor axis.}
+#'  \item{The tilt angle of the ellipse.}
+#'  \item{The area of the ellipse.}
+#' }
+#' If \code{bbox = TRUE}, in addition to the above, returns a data frame with the extreme values of the coordinates as the bounding box of the ellipse.
 #' @seealso  \code{conicfit}
 #' @examples 
 #' \dontrun{
@@ -21,13 +23,14 @@
 #' Ellipsefit(eg.hour, temp.hour, Pp.hour)
 #' }
 #' mydata <- data.frame(x = c(5.92, 5.37, 3.16, 0.71, -0.29, -1.14, -0.8291667, 4.14, 10.74, 18.97, 21.66,  21.57, 21.56, 23.15, 24.17, 24.10, 23.26, 19.39, 12.31, 6.11, 7.49, 5.79, 2.66, 1.01),
-#'                     y = c(0.14, 0.14, 0.10, 0.08, 0.08, 0.08, 0.12, 0.22, 0.36, 0.43, 0.42, 0.42, 0.43, 0.42, 0.37, 0.32, 0.26, 0.20, 0.12, 0.10, 0.14, 0.11, 0.07, 0.05))
+#'                      y = c(0.14, 0.14, 0.10, 0.08, 0.08, 0.08, 0.12, 0.22, 0.36, 0.43, 0.42, 0.42, 0.43, 0.42, 0.37, 0.32, 0.26, 0.20, 0.12, 0.10, 0.14, 0.11, 0.07, 0.05))
 #' ell <- Ellipsefit(mydata, x, y, coords = TRUE, bbox = TRUE)
 #' coord <- ell$Coord
 #' bbox <- ell$Bbox
 #' plot(y ~ x, data = mydata, ylim = c(0, 0.5), xlim = c(-2, 25))
 #' lines(y ~ x, data = coord, col = "blue")
 #' abline(v = bbox$x, h = bbox$y, col = "red")
+#'
 #' # Calculate bounding box area to compare to ellipse area
 #' bbox.area <- (bbox$x[2] - bbox$x[1]) * (bbox$y[2] - bbox$y[1])
 #' area.ratio <- ell$Para$Area / bbox.area
