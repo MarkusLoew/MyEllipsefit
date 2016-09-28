@@ -31,6 +31,11 @@
 #' lines(y ~ x, data = coord, col = "blue")
 #' abline(v = bbox$x, h = bbox$y, col = "red")
 #'
+#' # comparison with ellipse-function from car::ellipse
+#' par(new = T)
+#' # draw elliptical contours at the 0.5 probability or confidence level.
+#' dataEllipse(mydata$x, mydata$y, levels = 0.5, ylim = c(0, 0.5), xlim = c(-2, 25))
+
 #' # Calculate bounding box area to compare to ellipse area
 #' bbox.area <- (bbox$x[2] - bbox$x[1]) * (bbox$y[2] - bbox$y[1])
 #' area.ratio <- ell$Para$Area / bbox.area
@@ -55,7 +60,7 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
 	geopara.out <- as.data.frame(t(rep(NA, 6)))
 	names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
 			        "Axis_A", "Axis_B", "Angle", "Area")
-	return(geopara.out)
+        return(geopara.out)
    } else {
    
 	# AtoG converts algebraic parameters (A, B, C, D, E, F) 
@@ -119,11 +124,13 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", "Axis_A", "Axis_B", "Angle", "Area")
    
    if (coords == TRUE) {
+       print("coords is TRUE")
        xycoord <- data.frame(x = NA, y = NA)
        geopara.list <- list(geopara.out, xycoord)
        names(geopara.list) <- c("Para", "Coord")
        
 	   if (bbox == TRUE) {
+	       print("bbox is true")
 	       bbox.df <- data.frame(x = c(NA, NA),
 		                     y = c(NA, NA))
 	       rownames(bbox.df) <- c("Minima", "Maxima")

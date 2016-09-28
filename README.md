@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/MarkusLoew/MyEllipsefit.svg?branch=master)](https://travis-ci.org/MarkusLoew/MyEllipsefit)
 
-R package to fit an ellipse to data points. Convience wrapper around the [conicfit](https://cran.r-project.org/web/packages/conicfit/index.html) package to provide ellipsis parameters (axes, angle, area, bounding box, and more).
+R package to fit an ellipse to data points. Convience wrapper around the [conicfit](https://cran.r-project.org/web/packages/conicfit/index.html) package to provide ellipsis parameters (axes, angle, area, bounding box, and more). Offers an option to draw the ellipse as layer in ggplot2.
 
 See 
 
