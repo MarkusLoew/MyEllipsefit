@@ -3,6 +3,7 @@
 #' @description Calculates an elliptic fit of data as a \code{ggplot2} layer. Calculated using \code{MyEllipsefit::Ellipsefit}
 # '@inheritParams StatMyEll
 #' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::stat_ellipse
 #' @seealso  \code{Ellipsefit}, \code{conicfit}, \code{ggplot2}
 #' @examples
 #' mydata <- data.frame(x = c(5.92, 5.37, 3.16, 0.71, -0.29, -1.14, -0.8291667, 4.14, 10.74, 18.97, 21.66,  21.57, 21.56, 23.15, 24.17, 24.10, 23.26, 19.39, 12.31, 6.11, 7.49, 5.79, 2.66, 1.01),
