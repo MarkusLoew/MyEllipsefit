@@ -32,9 +32,9 @@
 #' abline(v = bbox$x, h = bbox$y, col = "red")
 #'
 #' # comparison with ellipse-function from car::ellipse
-#' par(new = T)
+#' par(new = TRUE)
 #' # draw elliptical contours at the 0.5 probability or confidence level.
-#' dataEllipse(mydata$x, mydata$y, levels = 0.5, ylim = c(0, 0.5), xlim = c(-2, 25))
+#' car::dataEllipse(mydata$x, mydata$y, levels = 0.5, ylim = c(0, 0.5), xlim = c(-2, 25))
 
 #' # Calculate bounding box area to compare to ellipse area
 #' bbox.area <- (bbox$x[2] - bbox$x[1]) * (bbox$y[2] - bbox$y[1])

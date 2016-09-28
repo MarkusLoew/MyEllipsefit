@@ -11,4 +11,6 @@ LazyData: true
 Imports:
     conicfit,
     ggplot2
+Suggests:
+    car
 RoxygenNote: 5.0.1
