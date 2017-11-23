@@ -61,8 +61,10 @@ p <- ggplot(mydata, aes(x = x, y = y))
  p <- p + geom_point()
  p <- p + stat_myell()
 p
+
+# comparison with ggplot2:stat_ellipse
+p + stat_ellipse(colour = "red") 
 }
 \seealso{
 \code{Ellipsefit}, \code{conicfit}, \code{ggplot2}
 }
-

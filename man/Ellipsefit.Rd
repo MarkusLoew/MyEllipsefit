@@ -58,4 +58,3 @@ area.ratio <- ell$Para$Area / bbox.area
 \seealso{
 \code{conicfit}
 }
-

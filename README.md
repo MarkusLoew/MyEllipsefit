@@ -58,4 +58,13 @@ abline(v = bbox$x, h = bbox$y, col = "red")
 bbox.area <- (bbox$x[2] - bbox$x[1]) * (bbox$y[2] - bbox$y[1])
 area.ratio <- ell$Para$Area / bbox.area
 
+
+# comparison with ggplot2::stat_ellipse
+library(ggplot2)
+
+p <- ggplot(mydata, aes(x = x, y = y))
+ p <- p + geom_point()
+ p <- p + stat_myell()
+ p <- p + stat_ellipse(colour = "red")
+p
 ```

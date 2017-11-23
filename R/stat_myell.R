@@ -13,6 +13,9 @@
 #'  p <- p + geom_point()
 #'  p <- p + stat_myell()
 #' p
+#'
+#' # comparison with ggplot2:stat_ellipse
+#' p + stat_ellipse(colour = "red") 
 #' @export stat_myell
 
 stat_myell <- function(mapping = NULL, data = NULL, geom = "path",
