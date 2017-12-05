@@ -14,6 +14,7 @@
 #'  \item{The distance from the center to the perimenter along the minor axis.}
 #'  \item{The tilt angle of the ellipse.}
 #'  \item{The area of the ellipse.}
+#'  \item{The goodness-of-fit, R2, of the ellipse.}
 #' }
 #' If \code{bbox = TRUE}, in addition to the above, returns a data frame with the extreme values of the coordinates as the bounding box of the ellipse.
 #' @seealso  \code{conicfit}
@@ -57,27 +58,44 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    
    if (inherits(ellipara, "try-error")) {
         message("Ellipsefit: no fit found, returning NA")
-	geopara.out <- as.data.frame(t(rep(NA, 6)))
+	geopara.out <- as.data.frame(t(rep(NA, 7)))
 	names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
-			        "Axis_A", "Axis_B", "Angle", "Area")
+			        "Axis_A", "Axis_B", "Angle", "R2", "Area")
         return(geopara.out)
    } else {
    
 	# AtoG converts algebraic parameters (A, B, C, D, E, F) 
 	# to geometric parameters (Center(1:2), Axes(1:2), Angle)
 	geopara <- conicfit::AtoG(ellipara)$Par
-	geopara.out <- as.data.frame(t(geopara))
 	
+	
+	# calculate R2
+	my.fit <- conicfit::fit.ellipseLMG(xy, 
+                     ParGini = geopara, 
+                     LambdaIni = 1)
+	SSres <- my.fit$RSS
+        SStot <- stats::var(y, na.rm = TRUE)
+        R2    <- 1 - (SSres / SStot)
+       
+        geopara.out <- as.data.frame(t(geopara))
+        geopara.out$R2 <- R2
+        names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
+	                        "Axis_A", "Axis_B", "Angle", "R2")
+        #print(geopara.out)
 	#    The X coordinate of the center of the ellipse.
 	#    The Y coordinate of the center of the ellipse.
 	#    The distance from the center to the perimeter along the major axis.
 	#    The distance from the center to the perimeter along the minor axis.
 	#    The tilt angle of the ellipse (counter-clockwise from X axis). 
 	#    Area of the ellipse pi * major axis * minor axis
-	names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
-	                        "Axis_A", "Axis_B", "Angle")
+	#    R2 of the fit
+		
 	geopara.out$Area <- pi * geopara.out$Axis_A * geopara.out$Axis_B
-	
+        
+        # re-order data frame
+        geopara.out <- geopara.out[, c("Centerpoint_X", "Centerpoint_Y", 
+	                        "Axis_A", "Axis_B", "Angle", "Area", "R2")]
+
 	if (coords == FALSE) {
 	   return(geopara.out)
 	   } else {
@@ -120,8 +138,8 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
    	} 
    } else {
    warning("nrow(xy) is not > 0")
-   geopara.out <- as.data.frame(t(rep(NA, 6)))
-   names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", "Axis_A", "Axis_B", "Angle", "Area")
+   geopara.out <- as.data.frame(t(rep(NA, 7)))
+   names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", "Axis_A", "Axis_B", "Angle", "Area", "R2")
    
    if (coords == TRUE) {
        print("coords is TRUE")

@@ -1,6 +1,6 @@
 Package: MyEllipsefit
 Title: Uses the conicfit package to fit an ellipse, convenience function with an opional ggplot2 layer
-Version: 0.0.3.1
+Version: 0.0.4.0
 Authors@R: person("Markus", "Loew", email = "m.loew@unimelb.edu.au", role = c("aut", "cre"))
 Description: Uses \code{conicfit} to calculate an ellipse to fit data. Convenience package to provide ellipsis parameters (axes, angle, area, and more). Provides a layer function for ggplot2 to visualise ellipses. See helpfile and example for differences between \code{car::ellipse} and this approach.
 Depends:

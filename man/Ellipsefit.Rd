@@ -27,6 +27,7 @@ Fit parameters are:
  \item{The distance from the center to the perimenter along the minor axis.}
  \item{The tilt angle of the ellipse.}
  \item{The area of the ellipse.}
+ \item{The goodness-of-fit, R2, of the ellipse.}
 }
 If \code{bbox = TRUE}, in addition to the above, returns a data frame with the extreme values of the coordinates as the bounding box of the ellipse.
 }
