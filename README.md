@@ -24,6 +24,7 @@ Fit parameters are:
 * The distance from the center to the perimenter along the minor axis. 
 * The tilt angle of the ellipse. 
 * The area of the ellipse. 
+* The goodnes-of-fit R2 of the ellipse fit.
 
 If *coords = TRUE*, returns a data frame with the coordinates of the ellipse in addition.
 

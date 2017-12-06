@@ -70,13 +70,17 @@ Ellipsefit <- function(data, x, y, coords = FALSE, bbox = FALSE) {
 	
 	
 	# calculate R2
-	my.fit <- conicfit::fit.ellipseLMG(xy, 
+	my.fit <- try(conicfit::fit.ellipseLMG(xy, 
                      ParGini = geopara, 
-                     LambdaIni = 1)
-	SSres <- my.fit$RSS
-        SStot <- stats::var(y, na.rm = TRUE)
-        R2    <- 1 - (SSres / SStot)
-       
+                     LambdaIni = 1))
+	if (inherits(my.fit, "try-error")) {
+	   R2 <- NA
+	} else {
+	   SSres <- my.fit$RSS
+           SStot <- stats::var(y, na.rm = TRUE)
+           R2    <- 1 - (SSres / SStot)
+	}
+	       
         geopara.out <- as.data.frame(t(geopara))
         geopara.out$R2 <- R2
         names(geopara.out) <- c("Centerpoint_X", "Centerpoint_Y", 
